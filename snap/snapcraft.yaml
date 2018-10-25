@@ -1,0 +1,97 @@
+name: picviewer
+adopt-info: imv
+summary: A command line image viewer intended for use with tiling window managers
+description: |
+  Image viewer for X11/Wayland based on imv
+
+  Support for over 30 different image file formats including
+    - Photoshop PSD files
+    - Animated GIFS
+    - Various RAW formats
+  Configurable key bindings and behaviour
+
+  To find out more about imv go to
+  https://github.com/eXeC64/imv
+
+  To find out more about the snap package of imv go to
+  https://github.com/ogra1/picviewer-snap
+
+  The icon is from https://www.flaticon.com/authors/picol
+
+grade: stable
+confinement: strict
+
+apps:
+  picviewer:
+    command: usr/bin/imv
+    environment:
+      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
+    plugs:
+      - desktop
+      - home
+      - opengl
+      - removable-media
+      - wayland
+      - x11
+
+parts:
+  imv:
+    source: https://github.com/eXeC64/imv.git
+    source-depth: 1
+    source-tag: v3.0.0
+    plugin: make
+    override-build: |
+      VER="$(git tag|tail -1)"
+      echo "setting version to $VER"
+      snapcraftctl set-version $VER
+      snapcraftctl build
+    build-packages:
+      - asciidoc
+      - libsdl2-dev
+      - libcmocka-dev
+      - libfreeimage-dev
+      - libsdl2-ttf-dev
+    stage-packages:
+      - libasound2
+      - libasyncns0
+      - libflac8
+      - libfontconfig1
+      - libfreeimage3
+      - libgomp1
+      - libilmbase12
+      - libjasper1
+      - libjbig0
+      - libjpeg-turbo8
+      - libjxr0
+      - liblcms2-2
+      - libogg0
+      - libopenexr22
+      - libopenjp2-7
+      - libpulse0
+      - libraw15
+      - libsdl2-2.0-0
+      - libsdl2-ttf-2.0-0
+      - libsndfile1
+      - libsndio6.1
+      - libtiff5
+      - libvorbis0a
+      - libvorbisenc2
+      - libwayland-client0
+      - libwayland-cursor0
+      - libwayland-egl1-mesa
+      - libwebp5
+      - libwebpmux1
+      - libx11-6
+      - libxau6
+      - libxcb1
+      - libxcursor1
+      - libxdmcp6
+      - libxext6
+      - libxfixes3
+      - libxi6
+      - libxinerama1
+      - libxkbcommon0
+      - libxrandr2
+      - libxrender1
+      - libxss1
+      - libxxf86vm1
