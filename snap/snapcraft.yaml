@@ -52,6 +52,7 @@ parts:
       - libfontconfig1-dev
       - libfreeimage-dev
       - libsdl2-ttf-dev
+      - xsltproc
     stage-packages:
       - libasound2
       - libasyncns0
