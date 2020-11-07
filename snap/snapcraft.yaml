@@ -18,17 +18,18 @@ description: |
 
   The icon is from https://www.flaticon.com/authors/picol
 
+base: core18
 grade: stable
 confinement: strict
 
 apps:
   picviewer:
-    command: usr/bin/imv
-    environment:
-      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
+    command: snap/command-chain/desktop-launch $SNAP/usr/bin/imv
+    extensions: [ gnome-3-28 ]
     plugs:
       - desktop
       - home
+      - network-bind
       - opengl
       - removable-media
       - wayland
@@ -38,7 +39,7 @@ parts:
   imv:
     source: https://github.com/eXeC64/imv.git
     source-depth: 1
-    source-tag: v3.0.0
+    source-tag: v4.1.0
     plugin: make
     override-build: |
       VER="$(git tag|tail -1)"
@@ -46,54 +47,19 @@ parts:
       snapcraftctl set-version $VER
       snapcraftctl build
     build-packages:
-      - asciidoc
-      - libsdl2-dev
-      - libcmocka-dev
-      - libfontconfig1-dev
+      - asciidoc-base
       - libfreeimage-dev
-      - libsdl2-ttf-dev
-      - xsltproc
+      - libglu1-mesa-dev
+      - librsvg2-dev
+      - libxkbcommon-x11-dev
     stage-packages:
-      - libasound2
-      - libasyncns0
-      - libflac8
-      - libfontconfig1
       - libfreeimage3
       - libgomp1
       - libilmbase12
-      - libjasper1
-      - libjbig0
-      - libjpeg-turbo8
       - libjxr0
-      - liblcms2-2
-      - libogg0
       - libopenexr22
       - libopenjp2-7
-      - libpulse0
-      - libraw15
-      - libsdl2-2.0-0
-      - libsdl2-ttf-2.0-0
-      - libsndfile1
-      - libsndio6.1
-      - libtiff5
-      - libvorbis0a
-      - libvorbisenc2
-      - libwayland-client0
-      - libwayland-cursor0
-      - libwayland-egl1-mesa
-      - libwebp5
-      - libwebpmux1
-      - libx11-6
-      - libxau6
-      - libxcb1
-      - libxcursor1
-      - libxdmcp6
-      - libxext6
-      - libxfixes3
-      - libxi6
-      - libxinerama1
-      - libxkbcommon0
-      - libxrandr2
-      - libxrender1
-      - libxss1
-      - libxxf86vm1
+      - libraw16
+      - libwebpmux3
+      - libxcb-xkb1
+      - libxkbcommon-x11-0
