@@ -53,6 +53,7 @@ parts:
       - libcmocka-dev
       - librsvg2-dev
       - libxkbcommon-x11-dev
+      - xsltproc
     stage-packages:
       - libfreeimage3
       - libgomp1
