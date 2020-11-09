@@ -47,7 +47,7 @@ parts:
       snapcraftctl set-version $VER
       snapcraftctl build
     build-packages:
-      - asciidoc-base
+      - asciidoc
       - libfreeimage-dev
       - libglu1-mesa-dev
       - libcmocka-dev
